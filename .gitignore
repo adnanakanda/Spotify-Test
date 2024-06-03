@@ -2,6 +2,7 @@ screenshots
 allure
 files/*
 *.txt
+!requirements.txt
 *.json
 *.lock
 *.png
