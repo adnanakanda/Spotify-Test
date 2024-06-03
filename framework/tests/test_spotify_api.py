@@ -1,6 +1,6 @@
 import pytest
 
-@pytest.mark.xdist_group(name="APIP")
+@pytest.mark.xdist_group(name="API")
 class TestAPI:
 
     @pytest.mark.parametrize("artist_name, expected_genre", [
