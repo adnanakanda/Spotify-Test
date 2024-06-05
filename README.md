@@ -20,3 +20,8 @@ This project is a client for interacting with the Spotify API.
   CLIENT_ID="your client ID"
   CLIENT_SECRET="your client secret"
 
+### Running Test in parallel with allure report generation
+  1. To run the test in parallel: `pytest framework/tests/ -k "xdist_group and (UI or API)" -n 1`
+  2. Command for report generation: `python -m pytest framework/tests/ --alluredir allure-results`
+  3. Generate report : `allure serve allure-results`
+4. 
