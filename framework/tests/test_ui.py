@@ -1,7 +1,6 @@
 import allure
 import pytest
 from allure_commons.types import AttachmentType
-
 from framework.forms.artist_form import ArtistForm
 from framework.forms.search_form import SearchForm
 from framework.forms.spotify_home_form import SpotifyHomeForm
