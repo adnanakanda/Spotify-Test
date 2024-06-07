@@ -16,9 +16,6 @@ class TestAPI:
         assert expected_genre.lower() in genres, f"Expected {expected_genre} in {artist['genres']}"
         with allure.step(f"Asserting if {artist_name} has the genre as '{expected_genre}'"):
             assert expected_genre.lower() in genres, f"Expected {expected_genre} in {artist['genres']}"
-        with allure.step('Attach API Response'):
-            allure.attach(json.dumps(artist), name="API Response for artist",
-                          attachment_type=allure.attachment_type.JSON)
 
     @pytest.mark.parametrize("artist_name, expected_song", [
         ("Drake", "One Dance"),
@@ -30,12 +27,5 @@ class TestAPI:
         artist = api_client.get_artist(artist_name)
         top_tracks = api_client.get_artist_top_tracks(artist["id"])
         song_names = [track["name"] for track in top_tracks]
-        assert expected_song in song_names, f"Expected {expected_song} in {song_names}"
         with allure.step(f"Asserting if {artist_name} has the popular song as '{expected_song}'"):
             assert expected_song in song_names, f"Expected {expected_song} in {song_names}"
-        with allure.step('Attach API Response'):
-            allure.attach(json.dumps(artist), name="API Response for artist",
-                          attachment_type=allure.attachment_type.JSON)
-        with allure.step('Attach API Response'):
-            allure.attach(json.dumps(top_tracks), name="API Response for top tracks",
-                          attachment_type=allure.attachment_type.JSON)

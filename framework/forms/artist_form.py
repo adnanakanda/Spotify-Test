@@ -1,3 +1,4 @@
+import allure
 from forms.base_form import BaseForm
 from browser.py_quality_services import PyQualityServices
 from selenium.webdriver.common.by import By
@@ -10,7 +11,7 @@ class ArtistForm(BaseForm):
         super(ArtistForm, self).__init__(
             (By.XPATH, LocatorConstant.PRECISE_TEXT_LOCATOR.format(self.__page_name)), self.__page_name)
 
-
+    @allure.step("Checking If the song name is displayed ")
     def is_song_name_exists(self,song_name):
         song_name = PyQualityServices.element_factory.get_label(
             (By.XPATH, LocatorConstant.PARTIAL_TEXT_LOCATOR.format(song_name)), "Song")

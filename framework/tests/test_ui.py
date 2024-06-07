@@ -18,10 +18,8 @@ class TestSpotifyUI:
     @allure.feature('Search Artist')
     @allure.story('Enter the name of the singer to search and check if the singer has a certain song')
     def test_search_artist(self, artist, song, browser):
-        with allure.step("Clicking search Button"):
-            self.__spotify_home_form.click_search()
-        with allure.step(f"Entering artist name: {artist}"):
-            self.__spotify_home_form.search_singer(artist)
+        self.__spotify_home_form.click_search()
+        self.__spotify_home_form.search_singer(artist)
         with allure.step(f"Asserting if {artist} has the popular song as '{song}'"):
             assert self.__artist_form.is_song_name_exists(song), f"{song} by {artist} not found!"
         png_bytes = browser.driver.get_screenshot_as_png()
