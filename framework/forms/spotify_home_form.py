@@ -1,3 +1,4 @@
+import allure
 from forms.base_form import BaseForm
 from browser.py_quality_services import PyQualityServices
 from selenium.webdriver.common.by import By
@@ -13,8 +14,10 @@ class SpotifyHomeForm(BaseForm):
         super(SpotifyHomeForm, self).__init__(
             (By.XPATH, LocatorConstant.PRECISE_TEXT_LOCATOR.format(self.__page_name)), self.__page_name)
 
+    @allure.step("Click on the search button")
     def click_search(self):
         self.__search_btn.click()
 
+    @allure.step("Search for a singer name")
     def search_singer(self,name):
         self.__search_field.clear_and_type(name)
