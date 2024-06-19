@@ -110,5 +110,3 @@ path `/allure-results`
             }
         }
     }
-
-    
