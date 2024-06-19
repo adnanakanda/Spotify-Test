@@ -58,8 +58,8 @@ path `/allure-results`
     agent any
 
         environment {
-            CLIENT_ID = 'cd64ad1c580e4abdb109518e37992781'
-            CLIENT_SECRET = '90d84f64ca174f7b99809715780080e3'
+            CLIENT_ID = 'your_ID'
+            CLIENT_SECRET = 'your_SECRET'
         }
         
         stages {
