@@ -52,3 +52,63 @@ This project is a client for interacting with the Spotify API and UI.
 Generate allure report 
 
 path `/allure-results`
+
+### For creating the job in pipeline use this pipeline script
+    pipeline {
+    agent any
+
+        environment {
+            CLIENT_ID = 'cd64ad1c580e4abdb109518e37992781'
+            CLIENT_SECRET = '90d84f64ca174f7b99809715780080e3'
+        }
+        
+        stages {
+            stage('Checkout') {
+                steps {
+                    // Checkout the code from GitHub
+                    git url: 'https://github.com/adnanakanda/Spotify-Test.git', branch: 'main'
+                }
+            }
+        
+            stage('Install Dependencies') {
+                steps {
+                    // Create a virtual environment and install the necessary dependencies
+                    bat '''
+                        python -m venv venv
+                        call venv\\Scripts\\activate
+                        pip install --no-cache-dir -r requirements.txt
+                        pip install webdriver-manager==4.0.1
+                    '''
+                }
+            }
+        
+            stage('Run Tests') {
+                steps {
+                    // Run tests and generate Allure report
+                    bat '''
+                        call venv\\Scripts\\activate
+                        python -m pytest framework/tests/ --alluredir allure-results
+                        allure generate allure-results --clean -o allure-report
+                        cd allure-report
+                        python -m http.server 8080
+                    '''
+                }
+            }
+        
+            stage('Post Actions') {
+                steps {
+                    // Archive the Allure report
+                    archiveArtifacts artifacts: 'allure-report/**', allowEmptyArchive: true
+                }
+            }
+        }
+        
+        post {
+            always {
+                // Clean up workspace
+                cleanWs()
+            }
+        }
+    }
+
+    
